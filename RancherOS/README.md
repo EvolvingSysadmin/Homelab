@@ -1,5 +1,3 @@
-# RancherOS
-
 # RancherOS Docker Config
 
 ## TOC
@@ -9,7 +7,6 @@
 * [RancherOS NFS Volume for Containers through Portainer](#rancheros-nfs-volume-for-containers-through-portainer)
 * [Rancher Server Docker Config](#rancher-server-docker-config)
 * [Resources](#resources)
-* [TODO](#todo)
 
 ### Variables
 * RancherOS IP Address
@@ -20,7 +17,7 @@
 
 ## RancherOS Installation 
 
-Resource <sup>[1](#Resources)</sup>
+Resource <sup>[1](#Resources)</sup> <sup>[2](#Resources)</sup>
 
 ### Installation and SSH Access
 * Boot ISO in ProxMox
@@ -46,7 +43,7 @@ Resource <sup>[1](#Resources)</sup>
 * Login as rancher
 
 ## RancherOS Initial Config 
-Resource <sup>[2](#Resources)</sup>
+Resource <sup>[3](#Resources)</sup>
 
 * Switch to root: ```sudo su -```
 * Switch to Ubuntu console: ```sudo ros console enable ubuntu```
@@ -56,17 +53,17 @@ Resource <sup>[2](#Resources)</sup>
 * Reboot system to apply the changes: ```Sudo reboot /f```
 * Update the system: ```sudo apt-get update```
 * Create share user with same ID as in freeNAS: ```adduser -u FREENAS_USER_ID share_user```
-* Add share_user to sudoers: <sup>[3](#Resources)</sup>
+* Add share_user to sudoers: <sup>[4](#Resources)</sup>
   * ```sudo su -```
   * ```visudo```
   * Add to bottom of file: ```share_user  ALL=(ALL) NOPASSWD:ALL```
 
 ## RancherOS Share Config
-Resource <sup>[4](#Resources)</sup>
+Resource <sup>[5](#Resources)</sup>
 * SSH@rancher@RancherOS
 * ```sudo su -```
 * cd ```/var/lib/rancher/conf/cloud-config.d/```
-* ```wget https://raw.githubusercontent.com/EvolvingSysadmin/Homelab/main/RancherOS/rancheros-cloud-config.yml``` [4](#Resources)</sup>
+* ```wget https://raw.githubusercontent.com/EvolvingSysadmin/Homelab/main/RancherOS/rancheros-cloud-config.yml``` [6](#Resources)</sup>
   * edit SERVER and SHARE (i for insert, esc for exit out of insert, :wq for quit with save)
 *  Apply changes: ```sudo reboot /f```
 * check that nfs share is now avilable, ssh in again and:
@@ -75,7 +72,7 @@ Resource <sup>[4](#Resources)</sup>
   * ```touch test.txt```
 
 ## RancherOS NFS Volume for Containers through Portainer 
-Resources <sup>[5](#Resources)</sup>
+Resources<sup>[7](#Resources)</sup> <sup>[8](#Resources)</sup> <sup>[9](#Resources)</sup> <sup>[10](#Resources)</sup>
 * Run portainer docker on port 9000: ```docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce```
 * Add portainer volume: portainer --> volume --> add:
   * Enable NFS Volume
@@ -87,36 +84,18 @@ Resources <sup>[5](#Resources)</sup>
       * Container: /mnt (bind)
       * Host: /mnt/nfs-1/
 
-      https://www.portainer.io/products/community-edition
-      https://hub.docker.com/r/portainer/portainer-ce 
-
 ## Rancher Server Docker Config
 * Add rancher container in docker: sudo docker run -d --restart=unless-stopped -p 8080:8080 rancher/server
 * Or add rancher container through portainer https://hub.docker.com/r/rancher/server
 
 ## Resources
 1. RancherOS Installation Youtube Tutorial: https://www.youtube.com/watch?v=_Od8Z3iv54M
-2. RancherOS Installation Ride Along: https://gist.github.com/s1lvester/fc5bcd4d3eb8e0c93b11854a01a0a034
-3. Add user to sudoers: https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/
-4. wget https://raw.githubusercontent.com/redshift-s/rancheros-docker-media/master/rancheros-cloud-config.yml
+2. RancherOS Documentation https://github.com/rancher/os/blob/master/README.md
+3. RancherOS Installation Ride Along: https://gist.github.com/s1lvester/fc5bcd4d3eb8e0c93b11854a01a0a034
+4. Add user to sudoers: https://linuxize.com/post/how-to-add-user-to-sudoers-in-ubuntu/
 5. RancherOS Share Config: https://github.com/redshift-s/rancheros-docker-media
-6. Portainer Docker Documentation: https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
-
-TODO
-* [X] Add links to bottom and number for better flow
-* [X] Add config files to github (enable git in commands)
-* [X] Preserve helpful docs
-* [X] add backups to walter documentation
-* [x] Check command syntax in new VM & run files
-* [X] Rebuild VM with backups at every point
-  * [X] Test restoring from backups
-* [x] Make TOC w/ Links and Links from root
-* [] Add variables in docs
-* [] Make public/private version of docs for sharing based off variables
-* [] Script where possible
-
-Make freenas docs //configure calibre testing
-
-
-NFS storage youtube vid: https://www.youtube.com/watch?v=RNhqvx8y_8A 
-https://github.com/rancher/os/blob/master/README.md
+6. https://raw.githubusercontent.com/redshift-s/rancheros-docker-media/master/rancheros-cloud-config.yml
+7. https://www.portainer.io/products/community-edition
+8. Portainer Documentation https://hub.docker.com/r/portainer/portainer-ce 
+9. Portainer Docker Documentation: https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
+10. NFS storage youtube vid: https://www.youtube.com/watch?v=RNhqvx8y_8A
