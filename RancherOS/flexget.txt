@@ -1,0 +1,15 @@
+docker run -ti --cap-add=NET_ADMIN --device /dev/net/tun --name vpn-test \
+           -e USER=user@email.com -e PASS=password \
+           -e RANDOM_TOP=n -e RECREATE_VPN_CRON=string \
+           -e COUNTRY=country1;country2 -e CATEGORY=category1;category2 \
+           -e PROTOCOL=protocol -d azinchen/nordvpn
+
+
+flexget web passwd $Rheav28042*
+
+
+docker run -d \
+    --name=flexget \
+    -p 5050:5050 \
+    -e FG_WEBUI_PASSWD=condor28042 \
+    wiserain/flexget

@@ -1,0 +1,17 @@
+#cloud-config
+
+rancher:
+  network:
+    interfaces:
+      eth0:
+        address: 192.168.10.30/27
+        gateway: 192.168.10.1
+        mtu: 1500
+        dhcp: false
+    dns:
+      nameservers:
+      - 192.168.10.1
+      - 8.8.4.4
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAyw9QD0N4dCbPGoYNUdt+auyiFRONhUFUQEQe5GAVw4lpNkpwOA92RqfxAxLPF2aVlccVN8sTBnmwDM+GgPpEyjMHbcosqcbQtoQ1DoPKotbqf4DW5pwd+sBgazKMRoFRjx/+qOcRyXi14PGti2A1EjSGKP9+VwiYFstkcdmthErhPGYAfvtXtseKl1B8HrzNeFH/ycMYL4XPY4ABmFDlffrNlxIkRigG2p8GCIVmnnLcQht+kqGr6phrubKKuxZ9eYA40TxXo01ZviUgmqH2vY7DMzipfVA89SFQIKAS7BA+Ow0JEQChuIUpXRX4bVqU4FPjqA80vPgieaOnhrj+HQ==

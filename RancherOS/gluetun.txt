@@ -1,0 +1,9 @@
+ docker run -d --name gluetun --cap-add=NET_ADMIN \
+ -e VPNSP="nordvpn" -e REGION="United States" \
+ -e OPENVPN_USER=contemptuous_condor@protonmail.com -e OPENVPN_PASSWORD=PASSWORD \
+ -v /a00fbe123c4b4e2cd8577fe15e1984a5966aaad200476246324c9d49b0465298:/gluetun \
+ qmcgaw/gluetun
+
+
+
+https://www.youtube.com/watch?v=xbSfaKwyfXE

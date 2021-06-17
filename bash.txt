@@ -1,0 +1,78 @@
+uname -a
+cat /etc/os-release
+Show Kernel Modules:
+ls /lib/modules/$(uname -r)
+Show Drivers:
+ls /lib/modules/$(uname -r)/kernel/drivers/
+modprobe -v (insert driver here)
+lsmod
+ip link show
+
+
+list network cards
+
+lspci | egrep -i --color 'network|ethernet'
+
+
+Ethernet controller: Mellanox Technologies MT27500 Family
+
+ lspci -v | grep Mellanox
+
+
+
+
+NAS: 	
+MNPH29D-XTR Mellanox ConnectX-2 10Gb/s 2-Port Ethernet Adapter
+
+Proxmox
+Mellanox ConnectX-3 EN PCIe x4 NIC 10GBe SFP+ Single Port Server Adapter cx311a MCX311A-XCAT
+
+Buy VPI cards
+
+sgdisk --zap-all /dev/nvme1n1
+
+
+Rancher Commands
+
+
+
+ip addr
+sudo passwd rancher
+sudo fdisk -l
+sudo ros install -c cloud-config.yml -d /dev/sda
+sudo poweroff
+
+Installation: https://www.youtube.com/watch?v=_Od8Z3iv54M
+
+
+Managing RancherOS/Docker
+docker images
+docker run -d portainer/portainer
+
+
+https://192.168.10.28:9000/
+
+
+sudo system-docker run -d --net=host portainer
+
+portainer: condor/$Rheav28042*
+
+
+sudo docker run -d -p 9999:9999 rancher/rancher
+
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
+
+
+
+https://rancher.com/docs/os/v1.x/en/quick-start-guide/
+https://rancher.com/docs/os/v1.x/en/installation/workstation/boot-from-iso/
+
+
+sudo docker run -d --restart=unless-stopped -p 8080:8080 rancher/server
+
+
+
+
+
